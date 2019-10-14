@@ -40,9 +40,15 @@ void calcFitness() {
 
         particle[i].setFitness(fitness);
 
+
+    }
+}
+
+void update() {
+    for (int i = 0; i < POPULATION; i++) {
         // check if it needs to update pBest
         if (particle[i].getPBestFitness() > particle[i].getFitness()) {
-            particle[i].setPBestFitness(fitness);
+            particle[i].setPBestFitness(particle[i].getFitness());
             for (int j = 0; j < DIMENSION; j++) {
                 particle[i].setPBestLocation(j, particle[i].getLocation()[j]);
             }
@@ -55,11 +61,7 @@ void calcFitness() {
                 gBestLocation[j] = particle[i].getPBestLocation()[j];
             }
         }
-    }
-}
 
-void update() {
-    for (int i = 0; i < POPULATION; i++) {
         for (int j = 0; j < DIMENSION; j++) {
             particle[i].setVelocity(j,
                                     W * particle[i].getLastVelocity()[j] +
